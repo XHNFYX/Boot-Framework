@@ -10,9 +10,6 @@
     </parent>
     <!--模块信息-->
     <artifactId>demo-utils</artifactId>
-    <groupId>com.bfw</groupId>
-    <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
     <!--模块配置-->
     <properties>
@@ -20,20 +17,20 @@
     </properties>
     <!--依赖坐标-->
     <dependencies>
-        <!--lombok代码简化依赖-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.bfw</groupId>
+            <artifactId>demo-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--jwt令牌-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
-        <!--knife4j-->
+        <!--hutool工具-->
         <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
 </project>

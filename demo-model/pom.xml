@@ -18,11 +18,10 @@
     </properties>
 <!--依赖坐标-->
     <dependencies>
-        <!--utils模块-->
+        <!--Jackson库集成-->
         <dependency>
-            <groupId>com.bfw</groupId>
-            <artifactId>demo-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
         <!--MyBatisPlus-->
         <dependency>
@@ -34,7 +33,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!--knife4j-->
+        <!--knife4j文档生成工具-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
