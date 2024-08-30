@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--继承父工程-->
+    <parent>
+        <groupId>com.bfw</groupId>
+        <artifactId>Boot-Framework</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <!--模块信息-->
+    <artifactId>demo-utils</artifactId>
+    <groupId>com.bfw</groupId>
+    <packaging>jar</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <!--模块配置-->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <!--依赖坐标-->
+    <dependencies>
+        <!--lombok代码简化依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--jwt令牌-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+        </dependency>
+        <!--knife4j-->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+</project>
