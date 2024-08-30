@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @BelongsProject: Boot-Framework
@@ -22,12 +21,9 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long UserId;
     private String username;
     private String password;
-    private Date createTime;
-    private Date updateTime;
-    private int isDeleted;
 }
