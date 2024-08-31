@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @Api(tags = "测试控制器")
 @Slf4j
 @RestController
-@RequestMapping("test")
+@RequestMapping("/admin/test")
 public class TestController {
 
     @Autowired

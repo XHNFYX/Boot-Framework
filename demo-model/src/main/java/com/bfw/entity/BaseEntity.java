@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -20,13 +19,22 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseEntity implements Serializable {
+public class BaseEntity{
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    @TableField(value = "create_user", fill = FieldFill.INSERT)
+    private Long createUser;
+
+    @TableField(value = "update_user", fill = FieldFill.INSERT_UPDATE)
+    private Long updateUser;
+
+    @TableField(value = "status")
+    private Integer status;
 
     @TableLogic
     private int isDeleted;

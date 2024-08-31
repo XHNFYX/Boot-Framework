@@ -1,4 +1,6 @@
-import java.util.Date;
+import com.bfw.constant.JwtClaimsConstant;
+import com.bfw.utils.JwtUtil;
+import io.jsonwebtoken.Claims;
 
 /**
  * @BelongsProject: Boot-Framework
@@ -8,11 +10,11 @@ import java.util.Date;
  * @Description:
  * @Version: 1.0
  */
-public class TestX{
+public class TestX {
     public static void main(String[] args) {
-        long l = System.currentTimeMillis();
-        Date date=new Date(l);
-        System.out.println(date);
-
+        String token = "eyJhbGciOiJIUzI1NiJ9.eyJlbXBJZCI6MSwiZXhwIjoxNzI1MTE4ODA5fQ.8FmT3apeNuPS7BjC_Gx4MgDqsmmHMra9KWunyq86pks";
+        Claims claims = JwtUtil.parseJWT("admin", token);
+        Long empId = Long.valueOf(claims.get(JwtClaimsConstant.EMP_ID).toString());
+        System.out.println(empId);
     }
 }

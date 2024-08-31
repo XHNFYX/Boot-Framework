@@ -1,12 +1,19 @@
 package com.bfw.config;
 
+import com.bfw.interceptor.TokenAdminInterceptor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +24,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -30,6 +41,9 @@ import java.util.List;
 @Slf4j
 @Configuration
 public class SpringWebConfig extends WebMvcConfigurationSupport {
+
+    @Autowired
+    TokenAdminInterceptor tokenAdminInterceptor;
 
     // 通过knife4j生成接口文档
     @Bean
@@ -48,23 +62,41 @@ public class SpringWebConfig extends WebMvcConfigurationSupport {
         return docket;
     }
 
-
-    //    时间格式转换器
-    @Bean
-    public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-        converter.setObjectMapper(mapper);
-        return converter;
+    //    自定义拦截器
+    protected void addInterceptors(InterceptorRegistry registry) {
+        log.info("开始注册自定义拦截器...");
+        registry.addInterceptor(tokenAdminInterceptor)
+                //    添加拦截路径
+                .addPathPatterns("/admin/**")
+                //     排除拦截路径
+                .excludePathPatterns("/admin/employee/login");
     }
 
-    //添加转换器
+    //    扩展消息转换器
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        //将我们定义的时间格式转换器添加到转换器列表中
-        converters.add(jackson2HttpMessageConverter());
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+
+        ObjectMapper objectMapper = converter.getObjectMapper();
+
+        SimpleModule simpleModule = new SimpleModule();
+
+        //  LocalDateTime时间格式化
+        simpleModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
+        // LocalDate时间格式化
+        simpleModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+
+        // LocalTime时间格式化
+        simpleModule.addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        objectMapper.registerModule(simpleModule);
+
+        //Data 时间格式化
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+
+        converter.setObjectMapper(objectMapper);
+        converters.add(0, converter);
     }
 
     // 设置静态资源映射

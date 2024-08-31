@@ -11,6 +11,16 @@ spring:
       url: jdbc:mysql://${demo.datasource.host}:${demo.datasource.port}/${demo.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${demo.datasource.username}
       password: ${demo.datasource.password}
+  redis:
+    host: ${demo.redis.host}
+    port: ${demo.redis.port}
+    password:
+    lettuce:
+      pool:
+        max-active: ${demo.redis.lettuce.pool.max-active}
+        max-idle: ${demo.redis.lettuce.pool.max-idle}
+        min-idle: ${demo.redis.lettuce.pool.min-idle}
+        time-between-eviction-runs: ${demo.redis.lettuce.pool.time-between-eviction-runs}
 mybatis-plus:
   type-aliases-package: com.bfw.entity
   global-config:
@@ -21,9 +31,11 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true   #开启驼峰命名
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #mybatis日志记录
-
 demo:
   jwt:
-    user-secret-key: demo
+    admin-secret-key: admin
+    admin-ttl: 7200000
+    admin-token-name: token
+    user-secret-key: user
     user-ttl: 7200000
     user-token-name: authentication
