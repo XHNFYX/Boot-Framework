@@ -10,7 +10,7 @@ import com.bfw.mapper.TestMapper;
 import com.bfw.result.Result;
 import com.bfw.service.TestService;
 import com.bfw.vo.UserVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
  * @Description: 业务测试类
  * @Version: 1.0
  */
+@Slf4j
 @Service
 public class TestServiceImpl extends ServiceImpl<TestMapper, User> implements TestService {
 

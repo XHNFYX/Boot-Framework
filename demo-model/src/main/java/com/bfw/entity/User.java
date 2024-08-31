@@ -22,8 +22,9 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends BaseEntity implements Serializable {
+
     @TableId(value = "id", type = IdType.AUTO)
-    private Long UserId;
+    private Long id;
     private String username;
     private String password;
 }
