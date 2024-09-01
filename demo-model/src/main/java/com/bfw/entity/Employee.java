@@ -21,7 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Employee extends BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = -40356785423868312L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
@@ -38,6 +38,5 @@ public class Employee extends BaseEntity implements Serializable {
 
     private String idNumber;
 
-
-
+    private Integer status;
 }

@@ -33,9 +33,6 @@ public class BaseEntity{
     @TableField(value = "update_user", fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
 
-    @TableField(value = "status")
-    private Integer status;
-
     @TableLogic
     private int isDeleted;
 }

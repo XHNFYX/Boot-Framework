@@ -29,6 +29,8 @@ public enum HttpEnum {
     PERMANENT_REDIRECT(308,  "永久重定向，且禁止改变http方法"),
     BAD_REQUEST(400,  "请求错误，通常是访问的域名未绑定引起"),
     UNAUTHORIZED(401,  "需要身份认证验证"),
+    ILLEGAL_AUTHENTICATION(401,"非法token信息"),
+    AUTHENTICATION_EXPIRE(401,"需要重新身份认证验证"),
     PAYMENT_REQUIRED(402,  "Payment Required"),
     FORBIDDEN(403,  "禁止访问"),
     NOT_FOUND(404,  "请求的内容未找到或已删除"),

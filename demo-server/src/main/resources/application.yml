@@ -30,7 +30,7 @@ mybatis-plus:
       logic-not-delete-value: 0
   configuration:
     map-underscore-to-camel-case: true   #开启驼峰命名
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #mybatis日志记录
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #mybatis日志记录
 demo:
   jwt:
     admin-secret-key: admin
