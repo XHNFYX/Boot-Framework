@@ -18,6 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmployeeLoginDTO {
+    private Long id;
+    private Integer status;
     private String username;
     private String password;
 }

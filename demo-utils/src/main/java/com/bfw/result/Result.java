@@ -26,6 +26,20 @@ public class Result<T> implements Serializable {
         return result;
     }
 
+    public static <T> Result<T> success(String msg) {
+        Result<T> result = new Result<T>();
+        result.setCode(true);
+        result.setMsg(msg);
+        return result;
+    }
+
+    public static <T> Result<T> success(T data) {
+        Result<T> result = new Result<T>();
+        result.setCode(true);
+        result.setData(data);
+        return result;
+    }
+
     public static <T> Result<T> success() {
         Result<T> result = new Result<T>();
         result.setCode(true);
@@ -38,6 +52,13 @@ public class Result<T> implements Serializable {
         result.setCode(false);
         result.setMsg(msg);
         result.setData(data);
+        return result;
+    }
+
+    public static <T> Result<T> error(String msg) {
+        Result<T> result = new Result<T>();
+        result.setCode(false);
+        result.setMsg(msg);
         return result;
     }
 
